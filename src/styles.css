@@ -1,0 +1,274 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif&family=JetBrains+Mono:wght@300;400;500&display=swap'); */
+@import "tailwindcss" source(none);
+@import "tw-animate-css";
+@source "../src";
+
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Mission palette */
+  --color-nebula-violet: #7B61FF;
+  --color-nebula-cyan: #00D4FF;
+  --color-nebula-pink: #FF6EC7;
+  --color-nebula-lime: #9DFF00;
+  --color-nebula-gold: #FFD700;
+  --color-earth-emerald: #10b981;
+  --color-earth-teal: #14b8a6;
+  --color-earth-ocean: #1e6fd9;
+  --color-earth-sunrise: #ff8a3d;
+  --color-cosmic-indigo: #4f3ed1;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.06 0.04 270);
+  --foreground: oklch(0.98 0.005 270);
+  --card: oklch(0.1 0.05 275);
+  --card-foreground: oklch(0.98 0.005 270);
+  --popover: oklch(0.1 0.05 275);
+  --popover-foreground: oklch(0.98 0.005 270);
+  --primary: oklch(0.72 0.2 290);
+  --primary-foreground: oklch(0.06 0.04 270);
+  --secondary: oklch(0.18 0.06 275);
+  --secondary-foreground: oklch(0.98 0.005 270);
+  --muted: oklch(0.18 0.06 275);
+  --muted-foreground: oklch(0.72 0.03 270);
+  --accent: oklch(0.75 0.18 200);
+  --accent-foreground: oklch(0.06 0.04 270);
+  --destructive: oklch(0.65 0.25 25);
+  --destructive-foreground: oklch(0.98 0.005 270);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.72 0.2 290);
+}
+
+:root[data-theme="light"] {
+  --background: oklch(0.96 0.03 230);
+  --foreground: oklch(0.22 0.06 250);
+  --card: oklch(0.99 0.01 230);
+  --card-foreground: oklch(0.22 0.06 250);
+  --popover: oklch(0.99 0.01 230);
+  --popover-foreground: oklch(0.22 0.06 250);
+  --primary: oklch(0.62 0.2 250);
+  --primary-foreground: oklch(0.99 0.01 230);
+  --secondary: oklch(0.92 0.04 230);
+  --secondary-foreground: oklch(0.22 0.06 250);
+  --muted: oklch(0.92 0.04 230);
+  --muted-foreground: oklch(0.45 0.05 250);
+  --accent: oklch(0.78 0.18 60);
+  --accent-foreground: oklch(0.22 0.06 250);
+  --border: oklch(0 0 0 / 12%);
+  --input: oklch(0 0 0 / 14%);
+  --ring: oklch(0.62 0.2 250);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+  .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: var(--font-mono); }
+}
+
+/* ---- Keyframes ---- */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+@keyframes shoot {
+  0% { transform: translate3d(0,0,0) rotate(215deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate3d(-120vw, 120vh, 0) rotate(215deg); opacity: 0; }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(10px); }
+}
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-r, 120px)) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(var(--orbit-r, 120px)) rotate(-360deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px var(--glow, #7B61FF), 0 0 40px var(--glow, #7B61FF); }
+  50% { box-shadow: 0 0 40px var(--glow, #7B61FF), 0 0 80px var(--glow, #7B61FF); }
+}
+@keyframes radar-scan {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink-cursor {
+  50% { border-color: transparent; }
+}
+@keyframes radio-wave {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; }
+}
+@keyframes bird-fly {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(60vw) translateY(-20px); }
+  100% { transform: translateX(120vw) translateY(0); }
+}
+
+.twinkle { animation: twinkle 3s ease-in-out infinite; }
+.float-slow { animation: float-slow 8s ease-in-out infinite; }
+.pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+/* Gradients */
+.bg-mission-gradient {
+  background: radial-gradient(ellipse at top, rgba(123,97,255,0.15), transparent 60%),
+              radial-gradient(ellipse at bottom, rgba(0,212,255,0.1), transparent 60%);
+}
+.text-aurora {
+  background: linear-gradient(90deg, #FF6EC7, #7B61FF, #00D4FF, #9DFF00);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: aurora-shift 8s ease infinite;
+}
+@keyframes aurora-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.glass {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+}
+.glass-strong {
+  background: rgba(10,10,30,0.55);
+  border: 1px solid rgba(123,97,255,0.25);
+  backdrop-filter: blur(20px);
+}
+
+.holo-grid {
+  background-image:
+    linear-gradient(rgba(0,212,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.scanline {
+  background: linear-gradient(180deg, transparent 0%, rgba(0,212,255,0.5) 50%, transparent 100%);
+}
+
+/* ---- Light theme tweaks for hardcoded dark surfaces ---- */
+:root[data-theme="light"] .text-aurora {
+  background: linear-gradient(90deg, #d6336c, #4f3ed1, #1e6fd9, #0f9d58);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+:root[data-theme="light"] .glass-strong {
+  background: rgba(255,255,255,0.65);
+  border-color: rgba(79,62,209,0.25);
+}
+/* Mission Control + Contact cards: invert dark navy → soft sky card */
+:root[data-theme="light"] [class*="bg-[#040420]"] {
+  background-color: rgba(255,255,255,0.7) !important;
+  color: #1a1f3a;
+}
+:root[data-theme="light"] [class*="bg-[#040420]"] .text-white,
+:root[data-theme="light"] [class*="bg-[#040420]"].text-white {
+  color: #1a1f3a !important;
+}
+:root[data-theme="light"] [class*="bg-[#040420]"] .text-white\/70 {
+  color: rgba(26,31,58,0.75) !important;
+}
+:root[data-theme="light"] [class*="bg-[#040420]"] .text-white\/40,
+:root[data-theme="light"] [class*="bg-[#040420]"] .text-white\/60 {
+  color: rgba(26,31,58,0.6) !important;
+}
+:root[data-theme="light"] [class*="border-white\\/10"] {
+  border-color: rgba(20,30,60,0.18) !important;
+}
+/* Adventure log card gradient overlay → use indigo for light */
+:root[data-theme="light"] .from-black {
+  --tw-gradient-from: rgba(20,30,60,0.85) var(--tw-gradient-from-position) !important;
+}
+:root[data-theme="light"] .via-black\/40 {
+  --tw-gradient-via: rgba(20,30,60,0.35) var(--tw-gradient-via-position) !important;
+}
+/* Hero badge + scroll hint chrome */
+:root[data-theme="light"] .bg-black\/30,
+:root[data-theme="light"] .bg-black\/40 {
+  background-color: rgba(255,255,255,0.55) !important;
+  color: #1a1f3a;
+}
+:root[data-theme="light"] .text-white\/40,
+:root[data-theme="light"] .text-white\/60,
+:root[data-theme="light"] .text-white\/70,
+:root[data-theme="light"] .text-white\/90 {
+  color: rgba(26,31,58,0.7) !important;
+}
+/* Constellation panel — use daytime sky gradient instead of deep space */
+:root[data-theme="light"] .from-\[\#0a0a2a\] {
+  --tw-gradient-from: #cbe8ff var(--tw-gradient-from-position) !important;
+}
+:root[data-theme="light"] .to-\[\#040418\] {
+  --tw-gradient-to: #aee0ff var(--tw-gradient-to-position) !important;
+}
+/* Hero mountains stop colors via overlay (svg gradient is fixed; soften with opacity in light) */
+/* Hero mountains: hide the dark silhouette entirely in day mode */
+:root[data-theme="light"] section#launch svg path[fill="url(#mtn)"] {
+  display: none;
+}
+/* Launch pad strip in Future Missions */
+:root[data-theme="light"] section#future .from-\[\#1a0b3d\] {
+  --tw-gradient-from: rgba(180,210,255,0.7) var(--tw-gradient-from-position) !important;
+}
+
+/* ---- Adventure Log polaroid cards (theme-aware) ---- */
+.polaroid-card {
+  background: #11122a;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04), inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+.polaroid-caption { color: #e7e9ff; }
+.polaroid-sub { color: rgba(231,233,255,0.55); }
+
+:root[data-theme="light"] .polaroid-card {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.06);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,0,0,0.04);
+}
+:root[data-theme="light"] .polaroid-caption { color: #1f2937; }
+:root[data-theme="light"] .polaroid-sub { color: rgba(31,41,55,0.55); }
